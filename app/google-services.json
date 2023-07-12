@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "231993505819",
+    "project_id": "lockerbooking-778f0",
+    "storage_bucket": "lockerbooking-778f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231993505819:android:7554444ca6a9c8e9bc20be",
+        "android_client_info": {
+          "package_name": "com.abhimishra.lockerbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231993505819-ai2hor44hjmdt0rk0i5iidi6d4mqbqdi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abhimishra.lockerbooking",
+            "certificate_hash": "fdc7b51bfd3c7f67b594dab41ea79289ac59a973"
+          }
+        },
+        {
+          "client_id": "231993505819-7dq1vj1vdehprqpmjsrj7uhevdod8t1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABo_hiursJZ5qHMFhpQn34liTmQLm2mrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231993505819-7dq1vj1vdehprqpmjsrj7uhevdod8t1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
