@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         findViews();
 
         mAuth = FirebaseAuth.getInstance();
-        loginWithReferenceIdClickMethod();
-
+        refIdlinkClickMethod();
         getOtpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +75,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void refIdlinkClickMethod() {
+        loginRefID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginRefIDLinkClick();
+
+            }
+        });
+    }
+
+    private void loginRefIDLinkClick() {
+        // // write a logic of what happens when click on Ref ID link on login page
+        startActivity(new Intent(MainActivity.this, login_Ref_Id.class));
+    }
+
     private void sendVerificationCode(String phoneNumber) {
 
         PhoneAuthOptions options =
@@ -93,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
-    mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
             final String code = credential.getSmsCode();
-            if(code!= null){
+            if (code != null) {
                 verifyCode(code);
             }
         }
@@ -111,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onCodeSent(@NonNull String s,
-                @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
 
-            super.onCodeSent(s,token);
+            super.onCodeSent(s, token);
             verificationId = s;
-            Toast.makeText(MainActivity.this,"code Sent", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "code Sent", Toast.LENGTH_SHORT).show();
             verifyOtpBtn.setEnabled(true);
             bar.setVisibility(View.INVISIBLE);
 
@@ -136,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"Login Successfull", Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, Home_Activity.class));
                         }
 
@@ -145,16 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
-    private void loginWithReferenceIdClickMethod() {
-        loginRefID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //What happens when clicking the "Login with Reference ID link"
-            }
-        });
-    }
-    private void findViews()  {
+    private void findViews() {
         mobileNumberText = findViewById(R.id.text_view_mobile_number);
         enteredMobileNumberField = findViewById(R.id.edit_text_mobile_number_in_box);
         loginRefID = findViewById(R.id.text_view_ref_id);
@@ -170,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             startActivity(new Intent(MainActivity.this, Home_Activity.class));
             finish();
         }

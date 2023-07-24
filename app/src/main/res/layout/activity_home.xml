@@ -2,20 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center">
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_reference_id"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20sp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/text_view_welcome_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to HomePage"
-        android:gravity="center"/>
+        android:layout_marginTop="50sp"
+        android:gravity="center"
+        android:text="Welcome to Book Locker"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/button_bookALockerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book a Locker"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/button_myBookingsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Bookings"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+
+
 
     <Button
         android:id="@+id/btn_logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="100dp"
         android:text="Log Out"/>
 
 

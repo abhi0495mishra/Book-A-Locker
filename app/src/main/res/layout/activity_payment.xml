@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text_view_paymentOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Payment Options"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/creditDebitRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit/Debit Card" />
+
+        <RadioButton
+            android:id="@+id/payLaterRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay Later" />
+
+    </RadioGroup>
+
+
+    <!-- Add other necessary payment fields here (e.g., cardholder name, expiry date, CVV, etc.) -->
+
+    <Button
+        android:id="@+id/finalPayButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Final Pay" />
+
+
+    <TextView
+        android:id="@+id/text_view_contactGmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Contact to @abhi0495mishra@gmail.com for any queries" />
+
+
+
+</LinearLayout>

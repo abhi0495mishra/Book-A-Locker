@@ -16,6 +16,21 @@
         android:theme="@style/Theme.LockerBooking"
         tools:targetApi="31">
         <activity
+            android:name=".booking_confirmation_page"
+            android:exported="false" />
+        <activity
+            android:name=".payment_activity"
+            android:exported="false" />
+        <activity
+            android:name=".select_dateTime"
+            android:exported="false" />
+        <activity
+            android:name=".select_available_lockers"
+            android:exported="false" />
+        <activity
+            android:name=".login_Ref_Id"
+            android:exported="false" />
+        <activity
             android:name=".Home_Activity"
             android:exported="false" />
         <activity
@@ -27,7 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

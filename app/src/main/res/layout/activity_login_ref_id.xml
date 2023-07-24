@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="90dp">
+
+    <ImageView
+        android:layout_width="350dp"
+        android:scaleType="fitXY"
+        android:layout_height="200dp"
+        android:src="@drawable/smart_locker" />
+
+    <TextView
+        android:id="@+id/text_view_login_refId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reference ID"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="30sp"/>
+    <EditText
+        android:id="@+id/edit_text_login_refId"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:hint="Enter Ref ID"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/text_view_login_MobileNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mobile Number"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="30sp"/>
+
+    <EditText
+        android:id="@+id/edit_text_login_MobileNo"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:hint="Enter Mob No."
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_login_refId_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textAlignment="center"
+        android:layout_marginTop="20sp"/>
+
+
+
+
+
+</LinearLayout>
