@@ -38,7 +38,7 @@
         android:layout_gravity="center"
         android:linksClickable="true"
         android:autoLink="web"
-        android:text="login with Ref ID">
+        android:text="Already a User? Login with Ref ID">
 
     </TextView>
 

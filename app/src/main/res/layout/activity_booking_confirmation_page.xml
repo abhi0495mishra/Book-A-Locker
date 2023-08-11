@@ -7,6 +7,14 @@
     android:gravity="center_horizontal"
     android:layout_marginTop="120dp">
 
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_reference_id"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20sp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <ImageView
         android:id="@+id/image_view_booking_successImage"
@@ -30,11 +38,12 @@
         android:text="Booking ID"/>
 
     <TextView
+        android:id="@+id/text_view_congrats_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Congrats, you can use the selected locker now."
+        android:text="Congrats, You can use the selected locker now."
         android:fontFamily="sans-serif-medium"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:padding="10dp"/>
 
     <Button

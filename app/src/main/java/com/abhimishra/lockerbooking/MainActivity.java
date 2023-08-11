@@ -1,9 +1,13 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.telephony.TelephonyCallback;
 import android.text.TextUtils;
@@ -14,6 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
+import com.abhimishra.lockerbooking.databases.DatabaseContract;
+import com.abhimishra.lockerbooking.databases.DatabaseHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -24,9 +31,16 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private String ref_ID_to_send;
     private FirebaseAuth mAuth;
     private TextView mobileNumberText;
     private EditText enteredMobileNumberField;
@@ -37,25 +51,60 @@ public class MainActivity extends AppCompatActivity {
     private String verificationId;
     private ProgressBar bar;
 
+    private DAORepositoryImpl dbRepository;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
 
+        //Initialize the dbRepository of class DAORepositoryImpl
+        dbRepository = new DAORepositoryImpl(getBaseContext());
+
         mAuth = FirebaseAuth.getInstance();
         refIdlinkClickMethod();
         getOtpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // What happens after clicking Send OTP button
-                if (TextUtils.isEmpty(enteredMobileNumberField.getText().toString())) {
-                    Toast.makeText(MainActivity.this, "Please enter valid phone number", Toast.LENGTH_LONG).show();
+
+                if (dbRepository.checkIfMobileNumberAlreadyExists(enteredMobileNumberField.getText().toString())) {
+
+                    Toast.makeText(MainActivity.this, "User already exists, please login with reference Id", Toast.LENGTH_LONG).show();
+
                 } else {
-                    String phone = enteredMobileNumberField.getText().toString();
-                    bar.setVisibility(View.VISIBLE);
-                    sendVerificationCode(phone);
+                    // What happens after clicking Get OTP button
+                    if (TextUtils.isEmpty(enteredMobileNumberField.getText().toString())) {
+                        Toast.makeText(MainActivity.this, "Please enter valid phone number", Toast.LENGTH_LONG).show();
+                    } else {
+                        String phone = enteredMobileNumberField.getText().toString();
+                        bar.setVisibility(View.VISIBLE);
+                        //sendVerificationCode(phone);
+
+
+                        // TODO - Move this code to "VerifyOtp" method
+                        //Temporary code
+
+                        //Generate Unique Reference ID for new user
+                        String uniqueReferenceId = generateUniqueReferenceId();
+
+                        // Store values of Mobile Number and Reference ID into the Database
+                        Map<String, String> map = new HashMap<>();
+                        map.put(DatabaseContract.User.COLUMN_NAME_MOBILE_NUMBER, enteredMobileNumberField.getText().toString());
+                        map.put(DatabaseContract.User.COLUMN_NAME_REFERENCE_ID, uniqueReferenceId);
+                        dbRepository.insert(map, DatabaseContract.User.TABLE_NAME);
+
+                        //move to next activity
+                        ref_ID_to_send = uniqueReferenceId;
+                        goToHomeActivity();
+
+                        //
+                    }
+
                 }
+
+
             }
         });
 
@@ -66,13 +115,34 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(enterOtpField.getText().toString())) {
                     Toast.makeText(MainActivity.this, "Wrong Otp Entered", Toast.LENGTH_LONG).show();
                 } else {
+
+
+                    //Verify OTP and Login to Homepage
                     verifyCode(enterOtpField.getText().toString());
+
+
+                    //TODO- Add HERE
+
                 }
 
             }
         });
 
 
+    }
+
+    private void goToHomeActivity() {
+
+        Intent intent = new Intent(this,Home_Activity.class);
+        intent.putExtra(REF_ID_TO_SEND,ref_ID_to_send);
+        startActivity(intent);
+
+    }
+
+    private String generateUniqueReferenceId() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(900000) + 100000; // Generate Random Number of 6 digits
+        return String.valueOf(randomNumber);
     }
 
     private void refIdlinkClickMethod() {
@@ -152,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, Home_Activity.class));
+
                         }
 
                     }
