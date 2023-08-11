@@ -1,5 +1,7 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
+import com.abhimishra.lockerbooking.databases.DatabaseContract;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Random;
@@ -22,12 +26,16 @@ public class Home_Activity extends AppCompatActivity {
 
     private TextView textReferenceId;
 
-    private String uniqueReferenceId;
+    private String referenceID;
 
     private Button bookAlockerBtn;
 
     private Button myBookingsBtn;
     //private DatabaseHelper databaseHelper;
+
+    private DAORepositoryImpl dbRepository;
+
+    private String uniqueReferenceId;
 
 
     @Override
@@ -35,24 +43,39 @@ public class Home_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Initialize the dbRepository of class DAORepositoryImpl
+        dbRepository = new DAORepositoryImpl(getBaseContext());
+
         mAuth = FirebaseAuth.getInstance();
         welcomeText = findViewById(R.id.text_view_welcome_text);
         logOutBtn = findViewById(R.id.btn_logoutbtn);
         bookAlockerBtn = findViewById(R.id.button_bookALockerBtn);
         myBookingsBtn = findViewById(R.id.button_myBookingsBtn);
 
+
         //code for reference ID
         textReferenceId = findViewById(R.id.text_view_reference_id);
-        uniqueReferenceId = generateUniqueReferenceId();
-        textReferenceId.setText("Reference ID: " + uniqueReferenceId);
+
+
+        //Fetch the Reference ID from Main Activity
+        Intent intent = getIntent();
+        String refIdTxt = intent.getStringExtra(REF_ID_TO_SEND);
+        //show ref Id on Home Page when user is signed UP!!
+        textReferenceId.setText("Reference ID: " + refIdTxt);
+
 
         bookAlockerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                System.out.println("Ref ID is " + refIdTxt);
                 Intent intent = new Intent(Home_Activity.this, select_available_lockers.class);
+                intent.putExtra(REF_ID_TO_SEND,refIdTxt);
                 startActivity(intent);
             }
         });
+
+
 
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +89,5 @@ public class Home_Activity extends AppCompatActivity {
 
     }
 
-    private String generateUniqueReferenceId() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(900000) + 100000; // Generate Random Number of 6 digits
-        return String.valueOf(randomNumber);
-    }
+
 }
