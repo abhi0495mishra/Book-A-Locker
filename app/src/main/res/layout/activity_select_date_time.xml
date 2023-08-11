@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
+    android:layout_marginTop="150dp"
     android:gravity="center_horizontal"
-    android:layout_marginTop="150dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/start_Date_Label"
@@ -38,19 +38,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/end_Date_Label"
+        android:layout_marginTop="1dp"
         android:focusable="false"
         android:hint="Select end date"
         android:inputType="datetime" />
 
     <Button
-        android:id="@+id/button_confirm_and_pay"
+        android:id="@+id/button_calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/end_Date_EditText"
+        android:layout_marginTop="20sp"
+        android:text="Calculate " />
+
+    <TextView
+        android:id="@+id/text_view_number_of_days"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_calculate"
+        android:layout_marginTop="20sp"/>
+
+    <TextView
+        android:id="@+id/text_view_number_of_hours"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_calculate"
+        android:layout_marginTop="20sp"/>
+
+    <TextView
+        android:id="@+id/text_view_total_fees"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_number_of_days"
+        android:layout_marginTop="20sp"/>
+
+
+    <Button
+        android:id="@+id/button_confirm_and_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_total_fees"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Confirm and Pay" />
+        android:text="Confirm and Pay"
+        android:enabled="false"/>
 
 </RelativeLayout>
