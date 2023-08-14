@@ -66,6 +66,30 @@ public class DAORepositoryImpl implements DAORepository {
 
 
     @Override
+    public String[] fetchAvailableLockers() {
+
+        Cursor cursor = db.rawQuery("Select LOCKER_ID from Locker where AVAILABILITY = ?",
+                new String[]{"1"});
+
+        String[] lockerArray = new String[cursor.getCount()];
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            int i = 0;
+
+            do {
+                lockerArray[i] = cursor.getString(0);
+                i++;
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return lockerArray;
+
+    }
+
+    @Override
     public Boolean checkIfMobileNumberAlreadyExists(String mobNum) {
 
 
@@ -75,9 +99,9 @@ public class DAORepositoryImpl implements DAORepository {
                 new String[]{mobNum},
                 null);
 
-        if(cursor.getCount()==0){
+        if (cursor.getCount() == 0) {
             return Boolean.FALSE;
-        }else{
+        } else {
             return Boolean.TRUE;
         }
     }
@@ -86,33 +110,34 @@ public class DAORepositoryImpl implements DAORepository {
     public Boolean checkMobNumAndRefID(String mobNum, String refID) {
 
         Cursor cursor = db.rawQuery("Select * from User where MOBILE_NUMBER = ? and REF_ID = ?",
-                new String[]{mobNum,refID});
+                new String[]{mobNum, refID});
 
-        if (cursor.getCount() >0 ){
+        if (cursor.getCount() > 0) {
             return Boolean.TRUE;
-        }else{
+        } else {
             return Boolean.FALSE;
         }
 
     }
 
-    public String fetchReferenceID(String mobileNumber){
 
-       Cursor cursor = dbFetchQuery(DatabaseContract.User.TABLE_NAME,
+    public String fetchReferenceID(String mobileNumber) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.User.TABLE_NAME,
                 new String[]{DatabaseContract.User.COLUMN_NAME_REFERENCE_ID},
                 DatabaseContract.User.COLUMN_NAME_MOBILE_NUMBER,
-               new String[]{mobileNumber},
+                new String[]{mobileNumber},
                 null);
 
-       String value = null;
+        String value = null;
 
-       if(cursor!=null && cursor.moveToFirst()){
-           value = cursor.getString(0);
-       }
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
         return value;
     }
 
-    private Cursor dbFetchQuery(String tableName,String[] desiredColumns, String selection, String[] selectionArgs, String sortOrder) {
+    private Cursor dbFetchQuery(String tableName, String[] desiredColumns, String selection, String[] selectionArgs, String sortOrder) {
 
         //Providing correct format for selection criteria
         selection = selection + " = ?";
