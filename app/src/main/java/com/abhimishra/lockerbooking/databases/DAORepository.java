@@ -10,7 +10,7 @@ public interface DAORepository {
 
     Boolean checkIfMobileNumberAlreadyExists(String mobNum);
 
-    void update();
+    void updateLockerAvailability(String locker);
 
     Boolean checkMobNumAndRefID(String mobNum, String refID);
 

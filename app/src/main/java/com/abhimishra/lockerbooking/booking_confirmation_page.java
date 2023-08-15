@@ -65,43 +65,43 @@ public class booking_confirmation_page extends AppCompatActivity {
 
         // Set the Booking ID
         String uniqueBookingID = BookingIDGenerator.generateBookingID();
-        bookingID.setText("BookingID: "+uniqueBookingID);
+        bookingID.setText("BookingID: " + uniqueBookingID);
 
 
         //creating HashMap to insert data into Database
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         //insert the data into database
 
         //Booking ID
-        map.put(DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,uniqueBookingID);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID, uniqueBookingID);
         //Reference ID
-        map.put(DatabaseContract.Booking.COLUMN_NAME_USER_REFERENCE_ID,refIdText);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_USER_REFERENCE_ID, refIdText);
         //Start Date
-        map.put(DatabaseContract.Booking.COLUMN_NAME_START_DATE,startDate);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_START_DATE, startDate);
         //End Date
-        map.put(DatabaseContract.Booking.COLUMN_NAME_END_DATE,endDate);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_END_DATE, endDate);
         //Locker ID
-        map.put(DatabaseContract.Booking.COLUMN_NAME_LOCKER_ID,lockerSelected);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_LOCKER_ID, lockerSelected);
         //Mode of Payment
-        map.put(DatabaseContract.Booking.COLUMN_NAME_PAYMENT_MODE,paymentMode);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_PAYMENT_MODE, paymentMode);
         //Payment Amount
-        map.put(DatabaseContract.Booking.COLUMN_NAME_PAYMENT_AMOUNT,paymentAmount);
+        map.put(DatabaseContract.Booking.COLUMN_NAME_PAYMENT_AMOUNT, paymentAmount);
 
         //insert the Map in Booking table
         dbRepository.insert(map, DatabaseContract.Booking.TABLE_NAME);
 
+        //Current locker unavailable in LOCKERS table
+        dbRepository.updateLockerAvailability(lockerSelected);
 
         // TODO - insert the current booking in "List of Bookings" of USER table
-        // TODO - make current locker unavailable in LOCKERS table
-
-
 
 
         backToHomePageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(booking_confirmation_page.this, Home_Activity.class);
+                intent.putExtra(REF_ID_TO_SEND, refIdText);
                 startActivity(intent);
             }
         });

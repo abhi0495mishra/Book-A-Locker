@@ -158,7 +158,9 @@ public class DAORepositoryImpl implements DAORepository {
     }
 
     @Override
-    public void update() {
-
+    public void updateLockerAvailability(String locker) {
+        String updateQuery = "UPDATE Locker SET AVAILABILITY = 0 where LOCKER_ID = ?";
+        String[] args = {locker};
+        db.execSQL(updateQuery, args);
     }
 }
