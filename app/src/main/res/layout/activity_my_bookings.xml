@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".My_bookings">
+    android:orientation="vertical"
+    android:padding="30sp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/text_view_booking_id_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Booking_ID"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_start_date_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Start_date"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_End_date_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="End_Date"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_locker_selected_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Locker_selected"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_total_fee_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Total_Fee"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:padding="10dp"
+        android:text="Cancel Booking"
+        android:textAlignment="center" />
+
+
+</LinearLayout>

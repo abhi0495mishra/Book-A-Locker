@@ -28,7 +28,6 @@ public class DAORepositoryImpl implements DAORepository {
     public void insert(Map<String, String> map, String tableName) {
 
         ContentValues values = new ContentValues();
-        // TODO - Refactor the logic to include only required columns to be added
 
         if (tableName == DatabaseContract.User.TABLE_NAME) {
 
@@ -158,9 +157,24 @@ public class DAORepositoryImpl implements DAORepository {
     }
 
     @Override
-    public void updateLockerAvailability(String locker) {
+    public void updateLockerAvailabilityFalse(String locker) {
         String updateQuery = "UPDATE Locker SET AVAILABILITY = 0 where LOCKER_ID = ?";
         String[] args = {locker};
         db.execSQL(updateQuery, args);
+    }
+
+    @Override
+    public void updateLockerAvailabilityTrue(String locker) {
+        String updateQuery = "UPDATE Locker SET AVAILABILITY = 1 where LOCKER_ID = ?";
+        String[] args = {locker};
+        db.execSQL(updateQuery, args);
+    }
+
+
+    @Override
+    public void cancelBooking(String bookingID) {
+        String deleteQuery = "DELETE FROM Booking where BOOKING_ID = ?";
+        String[] args = {bookingID};
+        db.execSQL(deleteQuery, args);
     }
 }

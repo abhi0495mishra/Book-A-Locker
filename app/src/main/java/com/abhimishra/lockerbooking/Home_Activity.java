@@ -1,6 +1,11 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.BOOKING_ID;
+import static com.abhimishra.lockerbooking.Constants.PAYMENT_AMOUNT;
 import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_END_DATE_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_ITEM_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_START_DATE_TO_SEND;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +42,13 @@ public class Home_Activity extends AppCompatActivity {
 
     private String uniqueReferenceId;
 
+    private String refIdText;
+    private String startDate;
+    private String endDate;
+    private String lockerSelected;
+    private String paymentAmount;
+    private String booking_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +76,14 @@ public class Home_Activity extends AppCompatActivity {
         textReferenceId.setText("Reference ID: " + refIdTxt);
 
 
+        //Get Intents from Booking Confirmation Page.
+        refIdText = intent.getStringExtra(REF_ID_TO_SEND);
+        startDate = intent.getStringExtra(SELECTED_START_DATE_TO_SEND);
+        endDate = intent.getStringExtra(SELECTED_END_DATE_TO_SEND);
+        lockerSelected = intent.getStringExtra(SELECTED_ITEM_TO_SEND);
+        paymentAmount = intent.getStringExtra(PAYMENT_AMOUNT);
+        booking_id = intent.getStringExtra(BOOKING_ID);
+
         bookAlockerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +95,30 @@ public class Home_Activity extends AppCompatActivity {
             }
         });
 
+        myBookingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(booking_id == null){
+
+                    Toast.makeText(Home_Activity.this,"No Bookings",Toast.LENGTH_LONG).show();
+
+                }else{
+                    Intent intent = new Intent(Home_Activity.this,My_bookings.class);
+                    intent.putExtra(REF_ID_TO_SEND, refIdText);
+                    intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
+                    intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);
+                    intent.putExtra(BOOKING_ID, booking_id);
+                    intent.putExtra(SELECTED_ITEM_TO_SEND,lockerSelected);
+                    intent.putExtra(PAYMENT_AMOUNT,paymentAmount);
+                    startActivity(intent);
+
+                }
+
+
+
+            }
+        });
 
 
         logOutBtn.setOnClickListener(new View.OnClickListener() {

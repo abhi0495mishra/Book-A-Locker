@@ -7,9 +7,10 @@ public class Constants {
     public static final String SELECTED_START_DATE_TO_SEND = "SELECTED_START_DATE_TO_SEND";
     public static final String SELECTED_END_DATE_TO_SEND = "SELECTED_END_DATE_TO_SEND";
     public static final String PAYMENT_MODE = "PAYMENT_MODE";
-
     public static final String REFERENCE_ID = "REFERENCE_ID";
     public static final String PAYMENT_AMOUNT = "PAYMENT_AMOUNT";
+    public static final String BOOKING_ID = "BOOKING_ID";
+
 
 
 

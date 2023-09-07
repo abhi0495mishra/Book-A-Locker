@@ -1,5 +1,6 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.BOOKING_ID;
 import static com.abhimishra.lockerbooking.Constants.PAYMENT_AMOUNT;
 import static com.abhimishra.lockerbooking.Constants.PAYMENT_MODE;
 import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
@@ -92,16 +93,18 @@ public class booking_confirmation_page extends AppCompatActivity {
         dbRepository.insert(map, DatabaseContract.Booking.TABLE_NAME);
 
         //Current locker unavailable in LOCKERS table
-        dbRepository.updateLockerAvailability(lockerSelected);
-
-        // TODO - insert the current booking in "List of Bookings" of USER table
-
+        dbRepository.updateLockerAvailabilityFalse(lockerSelected);
 
         backToHomePageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(booking_confirmation_page.this, Home_Activity.class);
                 intent.putExtra(REF_ID_TO_SEND, refIdText);
+                intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
+                intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);
+                intent.putExtra(BOOKING_ID, uniqueBookingID);
+                intent.putExtra(SELECTED_ITEM_TO_SEND,lockerSelected);
+                intent.putExtra(PAYMENT_AMOUNT,paymentAmount);
                 startActivity(intent);
             }
         });
