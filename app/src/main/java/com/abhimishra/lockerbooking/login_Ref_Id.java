@@ -1,5 +1,6 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.BOOKING_ID;
 import static com.abhimishra.lockerbooking.Constants.REFERENCE_ID;
 import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
 
@@ -36,7 +37,6 @@ public class login_Ref_Id extends AppCompatActivity {
         findviewsOnRefIdLoginPage();
 
         dbRepository = new DAORepositoryImpl(getBaseContext());
-
         Intent intent = getIntent();
         String referenceID = intent.getStringExtra(REFERENCE_ID);
 
