@@ -136,6 +136,87 @@ public class DAORepositoryImpl implements DAORepository {
         return value;
     }
 
+
+    public String fetchBookingID(String userRefID) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID},
+                DatabaseContract.Booking.COLUMN_NAME_USER_REFERENCE_ID,
+                new String[]{userRefID},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchStartDate(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_START_DATE},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchEndDate(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_END_DATE},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchSelectedLocker(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_LOCKER_ID},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchBookingPayment(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_PAYMENT_AMOUNT},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
     private Cursor dbFetchQuery(String tableName, String[] desiredColumns, String selection, String[] selectionArgs, String sortOrder) {
 
         //Providing correct format for selection criteria
@@ -169,7 +250,6 @@ public class DAORepositoryImpl implements DAORepository {
         String[] args = {locker};
         db.execSQL(updateQuery, args);
     }
-
 
     @Override
     public void cancelBooking(String bookingID) {

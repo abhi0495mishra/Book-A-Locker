@@ -9,7 +9,6 @@ public interface DAORepository {
     String[] fetchAvailableLockers();
 
     Boolean checkIfMobileNumberAlreadyExists(String mobNum);
-
     void updateLockerAvailabilityFalse(String locker);
     void updateLockerAvailabilityTrue(String locker);
 
