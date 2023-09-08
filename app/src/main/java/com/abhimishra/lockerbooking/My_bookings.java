@@ -89,7 +89,6 @@ public class My_bookings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
         returnToHomePage_myBookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

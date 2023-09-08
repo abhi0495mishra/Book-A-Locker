@@ -10,15 +10,16 @@
         android:id="@+id/text_view_reference_id_my_bookings"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/text_view_booking_id_my_bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="Booking_ID"
         android:textStyle="bold" />
 
@@ -26,7 +27,7 @@
         android:id="@+id/text_view_start_date_my_bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="Start_date"
         android:textStyle="bold" />
 
@@ -34,7 +35,7 @@
         android:id="@+id/text_view_End_date_my_bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="End_Date"
         android:textStyle="bold" />
 
@@ -42,7 +43,7 @@
         android:id="@+id/text_view_locker_selected_my_bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="Locker_selected"
         android:textStyle="bold" />
 
@@ -50,7 +51,7 @@
         android:id="@+id/text_view_total_fee_my_bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="Total_Fee"
         android:textStyle="bold" />
 
@@ -60,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:text="Cancel Booking"
         android:textAlignment="center" />
 
