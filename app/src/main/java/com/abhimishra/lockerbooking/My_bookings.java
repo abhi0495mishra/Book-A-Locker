@@ -29,6 +29,8 @@ public class My_bookings extends AppCompatActivity {
     private TextView totalFees_myBookings;
 
     private TextView lockerSelected_myBookings;
+    private TextView returnToHomePage_myBookings;
+    private TextView refId_myBookings;
     private Button cancelBtn;
     private String startDate;
     private String endDate;
@@ -48,7 +50,7 @@ public class My_bookings extends AppCompatActivity {
         //Initialize the dbRepository of class DAORepositoryImpl
         dbRepository = new DAORepositoryImpl(getBaseContext());
 
-        //Get all the intents from the booking confirmation page
+        //Get all the intents from the database
         Intent intent = getIntent();
         refIdText = intent.getStringExtra(REF_ID_TO_SEND);
         startDate = intent.getStringExtra(SELECTED_START_DATE_TO_SEND);
@@ -56,6 +58,10 @@ public class My_bookings extends AppCompatActivity {
         lockerSelected = intent.getStringExtra(SELECTED_ITEM_TO_SEND);
         paymentAmount = intent.getStringExtra(PAYMENT_AMOUNT);
         booking_id = intent.getStringExtra(BOOKING_ID);
+
+        //set reference Id in the top
+
+        refId_myBookings.setText("Reference ID: " + refIdText);
 
         //Display the details on the My Bookings page
 
@@ -74,16 +80,27 @@ public class My_bookings extends AppCompatActivity {
 
                 //change locker availability
                 dbRepository.updateLockerAvailabilityTrue(lockerSelected);
-
                 // display cancelled Toast Message
                 Toast.makeText(My_bookings.this,"Booking Cancelled successfully",Toast.LENGTH_LONG).show();
 
                 //Refresh the page and go to homepage
                 Intent intent = new Intent(My_bookings.this, Home_Activity.class);
+                intent.putExtra(REF_ID_TO_SEND,refIdText);
                 startActivity(intent);
-
-
-
+            }
+        });
+        
+        returnToHomePage_myBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(My_bookings.this, Home_Activity.class);
+                intent.putExtra(REF_ID_TO_SEND, refIdText);
+                intent.putExtra(BOOKING_ID, booking_id);
+                intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
+                intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);
+                intent.putExtra(SELECTED_ITEM_TO_SEND,lockerSelected);
+                intent.putExtra(PAYMENT_AMOUNT,paymentAmount);
+                startActivity(intent);
             }
         });
 
@@ -97,6 +114,8 @@ public class My_bookings extends AppCompatActivity {
         totalFees_myBookings = findViewById(R.id.text_view_total_fee_my_bookings);
         lockerSelected_myBookings = findViewById(R.id.text_view_locker_selected_my_bookings);
         cancelBtn = findViewById(R.id.button_cancelBtn);
+        returnToHomePage_myBookings = findViewById(R.id.text_view_back_to_login_page_my_bookings);
+        refId_myBookings = findViewById(R.id.text_view_reference_id_my_bookings);
 
     }
 }
