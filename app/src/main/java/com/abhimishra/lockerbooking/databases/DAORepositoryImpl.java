@@ -28,7 +28,6 @@ public class DAORepositoryImpl implements DAORepository {
     public void insert(Map<String, String> map, String tableName) {
 
         ContentValues values = new ContentValues();
-        // TODO - Refactor the logic to include only required columns to be added
 
         if (tableName == DatabaseContract.User.TABLE_NAME) {
 
@@ -66,6 +65,30 @@ public class DAORepositoryImpl implements DAORepository {
 
 
     @Override
+    public String[] fetchAvailableLockers() {
+
+        Cursor cursor = db.rawQuery("Select LOCKER_ID from Locker where AVAILABILITY = ?",
+                new String[]{"1"});
+
+        String[] lockerArray = new String[cursor.getCount()];
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            int i = 0;
+
+            do {
+                lockerArray[i] = cursor.getString(0);
+                i++;
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return lockerArray;
+
+    }
+
+    @Override
     public Boolean checkIfMobileNumberAlreadyExists(String mobNum) {
 
 
@@ -75,9 +98,9 @@ public class DAORepositoryImpl implements DAORepository {
                 new String[]{mobNum},
                 null);
 
-        if(cursor.getCount()==0){
+        if (cursor.getCount() == 0) {
             return Boolean.FALSE;
-        }else{
+        } else {
             return Boolean.TRUE;
         }
     }
@@ -86,33 +109,115 @@ public class DAORepositoryImpl implements DAORepository {
     public Boolean checkMobNumAndRefID(String mobNum, String refID) {
 
         Cursor cursor = db.rawQuery("Select * from User where MOBILE_NUMBER = ? and REF_ID = ?",
-                new String[]{mobNum,refID});
+                new String[]{mobNum, refID});
 
-        if (cursor.getCount() >0 ){
+        if (cursor.getCount() > 0) {
             return Boolean.TRUE;
-        }else{
+        } else {
             return Boolean.FALSE;
         }
 
     }
 
-    public String fetchReferenceID(String mobileNumber){
 
-       Cursor cursor = dbFetchQuery(DatabaseContract.User.TABLE_NAME,
+    public String fetchReferenceID(String mobileNumber) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.User.TABLE_NAME,
                 new String[]{DatabaseContract.User.COLUMN_NAME_REFERENCE_ID},
                 DatabaseContract.User.COLUMN_NAME_MOBILE_NUMBER,
-               new String[]{mobileNumber},
+                new String[]{mobileNumber},
                 null);
 
-       String value = null;
+        String value = null;
 
-       if(cursor!=null && cursor.moveToFirst()){
-           value = cursor.getString(0);
-       }
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
         return value;
     }
 
-    private Cursor dbFetchQuery(String tableName,String[] desiredColumns, String selection, String[] selectionArgs, String sortOrder) {
+
+    public String fetchBookingID(String userRefID) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID},
+                DatabaseContract.Booking.COLUMN_NAME_USER_REFERENCE_ID,
+                new String[]{userRefID},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchStartDate(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_START_DATE},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchEndDate(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_END_DATE},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchSelectedLocker(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_LOCKER_ID},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    public String fetchBookingPayment(String userBookingId) {
+
+        Cursor cursor = dbFetchQuery(DatabaseContract.Booking.TABLE_NAME,
+                new String[]{DatabaseContract.Booking.COLUMN_NAME_PAYMENT_AMOUNT},
+                DatabaseContract.Booking.COLUMN_NAME_BOOKING_ID,
+                new String[]{userBookingId},
+                null);
+
+        String value = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(0);
+        }
+        return value;
+    }
+
+    private Cursor dbFetchQuery(String tableName, String[] desiredColumns, String selection, String[] selectionArgs, String sortOrder) {
 
         //Providing correct format for selection criteria
         selection = selection + " = ?";
@@ -133,7 +238,23 @@ public class DAORepositoryImpl implements DAORepository {
     }
 
     @Override
-    public void update() {
+    public void updateLockerAvailabilityFalse(String locker) {
+        String updateQuery = "UPDATE Locker SET AVAILABILITY = 0 where LOCKER_ID = ?";
+        String[] args = {locker};
+        db.execSQL(updateQuery, args);
+    }
 
+    @Override
+    public void updateLockerAvailabilityTrue(String locker) {
+        String updateQuery = "UPDATE Locker SET AVAILABILITY = 1 where LOCKER_ID = ?";
+        String[] args = {locker};
+        db.execSQL(updateQuery, args);
+    }
+
+    @Override
+    public void cancelBooking(String bookingID) {
+        String deleteQuery = "DELETE FROM Booking where BOOKING_ID = ?";
+        String[] args = {bookingID};
+        db.execSQL(deleteQuery, args);
     }
 }

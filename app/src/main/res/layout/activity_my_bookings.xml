@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30sp">
+
+
+    <TextView
+        android:id="@+id/text_view_reference_id_my_bookings"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_booking_id_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Booking_ID"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_start_date_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Start_date"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_End_date_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="End_Date"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_locker_selected_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Locker_selected"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_total_fee_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Total_Fee"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Cancel Booking"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/text_view_back_to_login_page_my_bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:text="Back to Login page"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

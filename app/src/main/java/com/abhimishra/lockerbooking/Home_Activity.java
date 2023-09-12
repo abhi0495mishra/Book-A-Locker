@@ -1,6 +1,11 @@
 package com.abhimishra.lockerbooking;
 
+import static com.abhimishra.lockerbooking.Constants.BOOKING_ID;
+import static com.abhimishra.lockerbooking.Constants.PAYMENT_AMOUNT;
 import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_END_DATE_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_ITEM_TO_SEND;
+import static com.abhimishra.lockerbooking.Constants.SELECTED_START_DATE_TO_SEND;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +42,13 @@ public class Home_Activity extends AppCompatActivity {
 
     private String uniqueReferenceId;
 
+    private String refIdText;
+    private String startDate;
+    private String endDate;
+    private String lockerSelected;
+    private String paymentAmount;
+    private String booking_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +76,67 @@ public class Home_Activity extends AppCompatActivity {
         textReferenceId.setText("Reference ID: " + refIdTxt);
 
 
+        //Get Intents from Booking Confirmation Page.
+        refIdText = intent.getStringExtra(REF_ID_TO_SEND);
+        startDate = intent.getStringExtra(SELECTED_START_DATE_TO_SEND);
+        endDate = intent.getStringExtra(SELECTED_END_DATE_TO_SEND);
+        lockerSelected = intent.getStringExtra(SELECTED_ITEM_TO_SEND);
+        paymentAmount = intent.getStringExtra(PAYMENT_AMOUNT);
+        booking_id = intent.getStringExtra(BOOKING_ID);
+
         bookAlockerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                System.out.println("Ref ID is " + refIdTxt);
-                Intent intent = new Intent(Home_Activity.this, select_available_lockers.class);
-                intent.putExtra(REF_ID_TO_SEND,refIdTxt);
-                startActivity(intent);
+                String checkBookingID = dbRepository.fetchBookingID(refIdTxt);
+
+                if(checkBookingID == null){
+
+                    System.out.println("Ref ID is " + refIdTxt);
+                    Intent intent = new Intent(Home_Activity.this, select_available_lockers.class);
+                    intent.putExtra(REF_ID_TO_SEND,refIdTxt);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(Home_Activity.this,"Booking already Done. Check in the 'My Bookings' section.",Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
 
+        myBookingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String checkBookingID = dbRepository.fetchBookingID(refIdTxt);
+
+                if(checkBookingID == null){
+
+                    Toast.makeText(Home_Activity.this,"No Bookings",Toast.LENGTH_LONG).show();
+
+                }else{
+
+                    //fetch the user's booking data from the database
+                    String startDate = dbRepository.fetchStartDate(checkBookingID);
+                    String endDate = dbRepository.fetchEndDate(checkBookingID);
+                    String bookingAmount = dbRepository.fetchBookingPayment(checkBookingID);
+                    String lockerSelected = dbRepository.fetchSelectedLocker(checkBookingID);
+
+                    Intent intent = new Intent(Home_Activity.this,My_bookings.class);
+                    intent.putExtra(REF_ID_TO_SEND,refIdTxt);
+                    intent.putExtra(BOOKING_ID,checkBookingID);
+                    intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
+                    intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);
+                    intent.putExtra(SELECTED_ITEM_TO_SEND,lockerSelected);
+                    intent.putExtra(PAYMENT_AMOUNT,bookingAmount);
+                    startActivity(intent);
+
+                }
+
+
+
+            }
+        });
 
 
         logOutBtn.setOnClickListener(new View.OnClickListener() {

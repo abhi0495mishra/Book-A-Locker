@@ -17,8 +17,6 @@ import android.widget.Toast;
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
 import com.abhimishra.lockerbooking.databases.DatabaseContract;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class select_available_lockers extends AppCompatActivity {
 
@@ -43,9 +41,8 @@ public class select_available_lockers extends AppCompatActivity {
         //Initialize the dbRepository of class DAORepositoryImpl
         dbRepository = new DAORepositoryImpl(getBaseContext());
 
-
-        // TODO - Fetch these lockers from available lockers
-        String[] lockers = {"L1","L2","L3","L4","L5","L6","L7","L8","L9","L10"};
+        //Fetch locker from the Database and display on the page
+        String[] lockers = dbRepository.fetchAvailableLockers();
         ArrayAdapter<String> lockerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lockers);
         lockerAvailability.setAdapter(lockerAdapter);
 
@@ -53,19 +50,17 @@ public class select_available_lockers extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-
-                System.out.println("Selected Item is " + selectedItem);
-
                 Toast.makeText(select_available_lockers.this, "Clicked: " + selectedItem, Toast.LENGTH_SHORT).show();
 
 
                 //Navigate to Next Page
                 Intent intent = new Intent(select_available_lockers.this, select_dateTime.class);
                 intent.putExtra(SELECTED_ITEM_TO_SEND, selectedItem);
-                intent.putExtra(REF_ID_TO_SEND,refIDTxt);
+                intent.putExtra(REF_ID_TO_SEND, refIDTxt);
                 startActivity(intent);
             }
         });
 
     }
+
 }

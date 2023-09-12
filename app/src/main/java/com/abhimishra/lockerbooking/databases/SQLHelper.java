@@ -22,7 +22,7 @@ public class SQLHelper {
 
     protected static final String SQL_CREATE_LOCKER_ENTRIES =
             "CREATE TABLE " + DatabaseContract.Locker.TABLE_NAME + " (" +
-                    DatabaseContract.Locker.COLUMN_NAME_LOCKER_ID + " INTEGER PRIMARY KEY," +
+                    DatabaseContract.Locker.COLUMN_NAME_LOCKER_ID + " TEXT PRIMARY KEY," +
                     DatabaseContract.Locker.COLUMN_NAME_AVAILABILITY + " INTEGER);";
 
 
@@ -30,9 +30,9 @@ public class SQLHelper {
             "DROP TABLE IF EXISTS " + DatabaseContract.User.TABLE_NAME + ";";
 
     protected static final String SQL_DELETE_BOOKING_ENTRIES =
-                    "DROP TABLE IF EXISTS " + DatabaseContract.Booking.TABLE_NAME + ";";
+            "DROP TABLE IF EXISTS " + DatabaseContract.Booking.TABLE_NAME + ";";
 
 
     protected static final String SQL_DELETE_LOCKER_ENTRIES =
-                    "DROP TABLE IF EXISTS " + DatabaseContract.Locker.TABLE_NAME + ";";
+            "DROP TABLE IF EXISTS " + DatabaseContract.Locker.TABLE_NAME + ";";
 }

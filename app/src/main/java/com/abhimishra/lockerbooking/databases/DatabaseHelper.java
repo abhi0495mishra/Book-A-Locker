@@ -21,6 +21,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USER_ENTRIES);
         db.execSQL(SQL_CREATE_BOOKING_ENTRIES);
         db.execSQL(SQL_CREATE_LOCKER_ENTRIES);
+
+        //insert Available Lockers
+        for (int i = 1; i < 11; i++) {
+
+            String lockerID = "'L" + i + "'";
+
+            String sqlQuery = "INSERT INTO " +
+                    DatabaseContract.Locker.TABLE_NAME + " (" +
+                    DatabaseContract.Locker.COLUMN_NAME_LOCKER_ID + ", " +
+                    DatabaseContract.Locker.COLUMN_NAME_AVAILABILITY + ")" +
+                    " VALUES (" + lockerID + ",1); ";
+            db.execSQL(sqlQuery);
+        }
+
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -31,6 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_LOCKER_ENTRIES);
         onCreate(db);
     }
+
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }

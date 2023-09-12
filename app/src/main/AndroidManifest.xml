@@ -16,6 +16,9 @@
         android:theme="@style/Theme.LockerBooking"
         tools:targetApi="31">
         <activity
+            android:name=".My_bookings"
+            android:exported="false" />
+        <activity
             android:name=".ForgotReferenceId"
             android:exported="false" />
         <activity

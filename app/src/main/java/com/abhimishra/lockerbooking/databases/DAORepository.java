@@ -6,10 +6,15 @@ import java.util.Map;
 
 public interface DAORepository {
 
+    String[] fetchAvailableLockers();
+
     Boolean checkIfMobileNumberAlreadyExists(String mobNum);
-    void update();
+    void updateLockerAvailabilityFalse(String locker);
+    void updateLockerAvailabilityTrue(String locker);
+
+    void cancelBooking(String bookingID);
 
     Boolean checkMobNumAndRefID(String mobNum, String refID);
 
-    void insert(Map<String,String> map, String tableName);
+    void insert(Map<String, String> map, String tableName);
 }
