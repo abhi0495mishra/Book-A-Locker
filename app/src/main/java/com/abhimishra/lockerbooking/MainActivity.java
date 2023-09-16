@@ -5,11 +5,8 @@ import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.telephony.TelephonyCallback;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +17,6 @@ import android.widget.Toast;
 
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
 import com.abhimishra.lockerbooking.databases.DatabaseContract;
-import com.abhimishra.lockerbooking.databases.DatabaseHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -32,7 +28,6 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -148,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginRefIDLinkClick() {
         // // write a logic of what happens when click on Ref ID link on login page
-        startActivity(new Intent(MainActivity.this, login_Ref_Id.class));
+        startActivity(new Intent(MainActivity.this, Login_Ref_Id.class));
     }
 
     private void sendVerificationCode(String phoneNumber) {

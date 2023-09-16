@@ -16,21 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
-import com.abhimishra.lockerbooking.databases.DatabaseContract;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class ForgotReferenceId extends AppCompatActivity {
@@ -121,7 +115,7 @@ public class ForgotReferenceId extends AppCompatActivity {
         backToLoginPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ForgotReferenceId.this, login_Ref_Id.class);
+                Intent intent = new Intent(ForgotReferenceId.this, Login_Ref_Id.class);
                 intent.putExtra(REFERENCE_ID,refID);
                 startActivity(intent);
             }

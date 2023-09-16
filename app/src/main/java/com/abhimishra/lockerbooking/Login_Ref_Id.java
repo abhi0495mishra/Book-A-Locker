@@ -1,6 +1,5 @@
 package com.abhimishra.lockerbooking;
 
-import static com.abhimishra.lockerbooking.Constants.BOOKING_ID;
 import static com.abhimishra.lockerbooking.Constants.REFERENCE_ID;
 import static com.abhimishra.lockerbooking.Constants.REF_ID_TO_SEND;
 
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
 
-public class login_Ref_Id extends AppCompatActivity {
+public class Login_Ref_Id extends AppCompatActivity {
 
 
     private TextView textloginRefId;
@@ -50,19 +49,19 @@ public class login_Ref_Id extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (enterRefId.equals("") || enterMobileNo.equals("")){
-                    Toast.makeText(login_Ref_Id.this,"Please enter the details",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login_Ref_Id.this,"Please enter the details",Toast.LENGTH_LONG).show();
                 }else{
 
                     Boolean checkMobNumAndRefID = dbRepository.checkMobNumAndRefID(enterMobileNo.getText().toString(),
                             enterRefId.getText().toString());
 
                     if(checkMobNumAndRefID){
-                        Toast.makeText(login_Ref_Id.this,"Sign in Successfull",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(login_Ref_Id.this,Home_Activity.class);
+                        Toast.makeText(Login_Ref_Id.this,"Sign in Successfull",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Login_Ref_Id.this,Home_Activity.class);
                         intent.putExtra(REF_ID_TO_SEND,enterRefId.getText().toString());
                         startActivity(intent);
                     }else {
-                        Toast.makeText(login_Ref_Id.this,"Invalid Credentials",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_Ref_Id.this,"Invalid Credentials",Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -72,7 +71,7 @@ public class login_Ref_Id extends AppCompatActivity {
         newUserSignUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(login_Ref_Id.this,MainActivity.class);
+                Intent intent = new Intent(Login_Ref_Id.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +80,7 @@ public class login_Ref_Id extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(login_Ref_Id.this,ForgotReferenceId.class);
+                Intent intent = new Intent(Login_Ref_Id.this,ForgotReferenceId.class);
                 startActivity(intent);
             }
         });
