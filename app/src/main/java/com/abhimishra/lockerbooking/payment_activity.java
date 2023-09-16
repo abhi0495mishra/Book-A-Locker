@@ -18,13 +18,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abhimishra.lockerbooking.databases.DatabaseContract;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class payment_activity extends AppCompatActivity {
 
     private TextView paymentOptionsText;
@@ -83,7 +76,7 @@ public class payment_activity extends AppCompatActivity {
 
     private void performPayment() {
 
-        Intent intent = new Intent(payment_activity.this, booking_confirmation_page.class);
+        Intent intent = new Intent(payment_activity.this, Booking_confirmation_page.class);
         intent.putExtra(REF_ID_TO_SEND, refIdText);
         intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
         intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);

@@ -23,7 +23,7 @@ import com.abhimishra.lockerbooking.databases.DatabaseContract;
 import java.util.HashMap;
 import java.util.Map;
 
-public class booking_confirmation_page extends AppCompatActivity {
+public class Booking_confirmation_page extends AppCompatActivity {
 
     private ImageView greeTickImg;
     private TextView bookingSucessText;
@@ -98,7 +98,7 @@ public class booking_confirmation_page extends AppCompatActivity {
         backToHomePageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(booking_confirmation_page.this, Home_Activity.class);
+                Intent intent = new Intent(Booking_confirmation_page.this, Home_Activity.class);
                 intent.putExtra(REF_ID_TO_SEND, refIdText);
                 intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
                 intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);

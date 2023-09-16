@@ -50,7 +50,7 @@ public class My_bookings extends AppCompatActivity {
         //Initialize the dbRepository of class DAORepositoryImpl
         dbRepository = new DAORepositoryImpl(getBaseContext());
 
-        //Get all the intents from the database
+        //Get all the intents
         Intent intent = getIntent();
         refIdText = intent.getStringExtra(REF_ID_TO_SEND);
         startDate = intent.getStringExtra(SELECTED_START_DATE_TO_SEND);

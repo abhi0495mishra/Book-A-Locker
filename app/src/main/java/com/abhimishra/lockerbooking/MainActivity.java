@@ -80,26 +80,8 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         String phone = enteredMobileNumberField.getText().toString();
                         bar.setVisibility(View.VISIBLE);
-                        //sendVerificationCode(phone);
+                        sendVerificationCode(phone);
 
-
-                        // TODO - Move this code to "VerifyOtp" method
-                        //Temporary code
-
-                        //Generate Unique Reference ID for new user
-                        String uniqueReferenceId = generateUniqueReferenceId();
-
-                        // Store values of Mobile Number and Reference ID into the Database
-                        Map<String, String> map = new HashMap<>();
-                        map.put(DatabaseContract.User.COLUMN_NAME_MOBILE_NUMBER, enteredMobileNumberField.getText().toString());
-                        map.put(DatabaseContract.User.COLUMN_NAME_REFERENCE_ID, uniqueReferenceId);
-                        dbRepository.insert(map, DatabaseContract.User.TABLE_NAME);
-
-                        //move to next activity
-                        ref_ID_to_send = uniqueReferenceId;
-                        goToHomeActivity();
-
-                        //
                     }
 
                 }
@@ -116,12 +98,21 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Wrong Otp Entered", Toast.LENGTH_LONG).show();
                 } else {
 
-
                     //Verify OTP and Login to Homepage
                     verifyCode(enterOtpField.getText().toString());
 
+                    //Generate Unique Reference ID for new user
+                    String uniqueReferenceId = generateUniqueReferenceId();
 
-                    //TODO- Add HERE
+                    // Store values of Mobile Number and Reference ID into the Database
+                    Map<String, String> map = new HashMap<>();
+                    map.put(DatabaseContract.User.COLUMN_NAME_MOBILE_NUMBER, enteredMobileNumberField.getText().toString());
+                    map.put(DatabaseContract.User.COLUMN_NAME_REFERENCE_ID, uniqueReferenceId);
+                    dbRepository.insert(map, DatabaseContract.User.TABLE_NAME);
+
+                    //move to next activity
+                    ref_ID_to_send = uniqueReferenceId;
+                    goToHomeActivity();
 
                 }
 
