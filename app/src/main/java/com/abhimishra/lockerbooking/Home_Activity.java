@@ -17,11 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
-import com.abhimishra.lockerbooking.databases.DatabaseContract;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Random;
-import java.util.UUID;
 
 public class Home_Activity extends AppCompatActivity {
 
@@ -93,7 +89,7 @@ public class Home_Activity extends AppCompatActivity {
                 if(checkBookingID == null){
 
                     System.out.println("Ref ID is " + refIdTxt);
-                    Intent intent = new Intent(Home_Activity.this, select_available_lockers.class);
+                    Intent intent = new Intent(Home_Activity.this, Select_Available_Lockers.class);
                     intent.putExtra(REF_ID_TO_SEND,refIdTxt);
                     startActivity(intent);
                 } else {

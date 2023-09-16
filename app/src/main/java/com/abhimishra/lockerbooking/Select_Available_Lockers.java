@@ -15,10 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abhimishra.lockerbooking.databases.DAORepositoryImpl;
-import com.abhimishra.lockerbooking.databases.DatabaseContract;
 
 
-public class select_available_lockers extends AppCompatActivity {
+public class Select_Available_Lockers extends AppCompatActivity {
 
     private TextView lockerAvailabilityText;
 
@@ -50,11 +49,11 @@ public class select_available_lockers extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-                Toast.makeText(select_available_lockers.this, "Clicked: " + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Select_Available_Lockers.this, "Clicked: " + selectedItem, Toast.LENGTH_SHORT).show();
 
 
                 //Navigate to Next Page
-                Intent intent = new Intent(select_available_lockers.this, select_dateTime.class);
+                Intent intent = new Intent(Select_Available_Lockers.this, Select_DateTime.class);
                 intent.putExtra(SELECTED_ITEM_TO_SEND, selectedItem);
                 intent.putExtra(REF_ID_TO_SEND, refIDTxt);
                 startActivity(intent);

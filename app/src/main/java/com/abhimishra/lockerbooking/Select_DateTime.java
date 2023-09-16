@@ -20,18 +20,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.abhimishra.lockerbooking.databases.DatabaseContract;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-public class select_dateTime extends AppCompatActivity {
+public class Select_DateTime extends AppCompatActivity {
 
     private TextView startDateLabel;
     private EditText startDateEditBox;
@@ -133,10 +129,10 @@ public class select_dateTime extends AppCompatActivity {
         confirmAndPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(select_dateTime.this, "Details Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(Select_DateTime.this, "Details Saved", Toast.LENGTH_LONG).show();
 
                 // Move to next Activity
-                Intent intent = new Intent(select_dateTime.this, payment_activity.class);
+                Intent intent = new Intent(Select_DateTime.this, Payment_Activity.class);
                 intent.putExtra(SELECTED_START_DATE_TO_SEND, startDateEditBox.getText().toString());
                 intent.putExtra(SELECTED_END_DATE_TO_SEND, endDateEditBox.getText().toString());
                 intent.putExtra(REF_ID_TO_SEND, refIdText);
@@ -211,7 +207,7 @@ public class select_dateTime extends AppCompatActivity {
 
         // Create DatePickerDialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                select_dateTime.this,
+                Select_DateTime.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -222,7 +218,7 @@ public class select_dateTime extends AppCompatActivity {
 
                         // Create TimePickerDialog
                         TimePickerDialog timePickerDialog = new TimePickerDialog(
-                                select_dateTime.this,
+                                Select_DateTime.this,
                                 new TimePickerDialog.OnTimeSetListener() {
                                     @Override
                                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

@@ -18,7 +18,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class payment_activity extends AppCompatActivity {
+public class Payment_Activity extends AppCompatActivity {
 
     private TextView paymentOptionsText;
     private RadioButton creditDebitBtn;
@@ -76,7 +76,7 @@ public class payment_activity extends AppCompatActivity {
 
     private void performPayment() {
 
-        Intent intent = new Intent(payment_activity.this, Booking_confirmation_page.class);
+        Intent intent = new Intent(Payment_Activity.this, Booking_confirmation_page.class);
         intent.putExtra(REF_ID_TO_SEND, refIdText);
         intent.putExtra(SELECTED_START_DATE_TO_SEND,startDate);
         intent.putExtra(SELECTED_END_DATE_TO_SEND,endDate);
